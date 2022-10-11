@@ -106,3 +106,6 @@ all.config
 
 # Kdevelop4
 *.kdev4
+
+# Compile commands json
+compile_commands.json
