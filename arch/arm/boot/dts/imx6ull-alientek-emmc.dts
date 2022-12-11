@@ -155,6 +155,26 @@
 		           0X0209C000 0X04 /* GPIO1_DR_BASE */ 
 		           0X0209C004 0X04 >; /* GPIO1_GDIR_BASE */
 	};
+
+	gpioled {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "atk-alpha-gpioled";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_led>;
+		led-gpio = <&gpio1 3 GPIO_ACTIVE_LOW>;
+		status = "okay";
+	};
+
+	beep {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "atk-alpha-beep";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_beep>;
+		beep-gpio = <&gpio5 1 GPIO_ACTIVE_HIGH>;
+		status = "okay";
+	};
 };
 
 &cpu0 {
@@ -305,6 +325,18 @@
 			>;
 		};
 
+		pinctrl_led: ledgrp {
+			fsl,pins = <
+				MX6UL_PAD_GPIO1_IO03__GPIO1_IO03 0x10B0 /* LED0 */
+			>;
+		};
+
+		pinctrl_beep: beepgrp {
+			fsl,pins = <
+				MX6ULL_PAD_SNVS_TAMPER1__GPIO5_IO01 0x10B0 /* BEEP */
+			>;
+		};
+
 		pinctrl_csi1: csi1grp {
 			fsl,pins = <
 				MX6UL_PAD_CSI_MCLK__CSI_MCLK		0x1b088
@@ -447,7 +479,7 @@
 			fsl,pins = <
 				MX6UL_PAD_GPIO1_IO01__GPIO1_IO01	0xb0
 				MX6UL_PAD_GPIO1_IO02__GPIO1_IO02	0xb0
-				MX6UL_PAD_GPIO1_IO03__GPIO1_IO03	0xb0
+				/* MX6UL_PAD_GPIO1_IO03__GPIO1_IO03	0xb0 */
 				MX6UL_PAD_GPIO1_IO04__GPIO1_IO04	0xb0
 			>;
 		};
@@ -700,7 +732,7 @@
 &tsc {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_tsc>;
-	xnur-gpio = <&gpio1 3 GPIO_ACTIVE_LOW>;
+	/* xnur-gpio = <&gpio1 3 GPIO_ACTIVE_LOW>; */
 	measure-delay-time = <0xffff>;
 	pre-charge-time = <0xfff>;
 	status = "okay";
