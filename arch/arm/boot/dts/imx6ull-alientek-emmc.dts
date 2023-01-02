@@ -182,7 +182,7 @@
 		compatible = "atk-alpha-key";
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_key>;
-		led-gpio = <&gpio1 18 GPIO_ACTIVE_LOW>;
+		key-gpio = <&gpio1 18 GPIO_ACTIVE_LOW>;
 		status = "okay";
 	};
 };
