@@ -183,6 +183,8 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_key>;
 		key-gpio = <&gpio1 18 GPIO_ACTIVE_LOW>;
+		interrupt-parent = <&gpio1>;
+		interrupts = <18 IRQ_TYPE_EDGE_BOTH>;
 		status = "okay";
 	};
 };
