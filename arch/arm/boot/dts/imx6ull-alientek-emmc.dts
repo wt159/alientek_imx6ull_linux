@@ -144,6 +144,17 @@
 		};
 	};
 
+	dtsleds {
+		compatible = "gpio-leds";
+
+		led0 {
+			label = "red";
+			gpios = <&gpio1 3 GPIO_ACTIVE_LOW>;
+			linx,default-trigger = "heartbeat";
+			default-state = "off";
+		};
+	};
+
 	alphaled {
 		#address-cells = <1>;
 		#size-cells = <1>;
