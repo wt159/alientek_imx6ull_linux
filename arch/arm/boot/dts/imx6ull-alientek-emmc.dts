@@ -634,6 +634,15 @@
 				MX6UL_PAD_LCD_RESET__WDOG1_WDOG_ANY    0x30b0
 			>;
 		};
+
+		pinctrl_ecspi3: icm20608 {
+			fsl,pins = <
+				MX6UL_PAD_UART2_TX_DATA__GPIO1_IO20 0x10b0 /* CS */
+				MX6UL_PAD_UART2_RX_DATA__ECSPI3_SCLK 0x10b1 /* SCLK */
+				MX6UL_PAD_UART2_RTS_B__ECSPI3_MISO 0x10b1 /* MISO */
+				MX6UL_PAD_UART2_CTS_B__ECSPI3_MOSI 0x10b1 /* MOSI */
+			>;
+		};
 	};
 };
 
@@ -781,7 +790,7 @@
 	/* for DTE mode, add below change */
 	/* fsl,dte-mode; */
 	/* pinctrl-0 = <&pinctrl_uart2dte>; */
-	status = "okay";
+	status = "disabled";
 };
 
 &usbotg1 {
@@ -833,4 +842,18 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_wdog>;
 	fsl,wdog_b;
+};
+
+&ecspi3 {
+	fsl,spi-num-chipselects = <1>;
+	cs-gpios = <&gpio1 20 GPIO_ACTIVE_LOW>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_ecspi3>;
+	status = "okay";
+
+	spidev: icm20608@0 {
+		compatible = "alientek,icm20608";
+		spi-max-frequency = <8000000>;
+		reg = <0>;
+	};
 };
