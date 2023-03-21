@@ -68,7 +68,6 @@
 			regulator-name = "VSD_3V3";
 			regulator-min-microvolt = <3300000>;
 			regulator-max-microvolt = <3300000>;
-			gpio = <&gpio1 9 GPIO_ACTIVE_HIGH>;
 			enable-active-high;
 		};
 
@@ -336,6 +335,19 @@
 			};
 		};
 	};
+
+
+	ft5426: ft5426@38 {
+		compatible = "edt,edt-ft5426";
+		reg = <0x38>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_tsc
+					&pinctrl_tsc_reset >;
+		interrupt-parent = <&gpio1>;
+		interrupts = <9 0>;
+		reset-gpios = <&gpio5 9 GPIO_ACTIVE_LOW>;
+		interrupt-gpios = <&gpio1 9 GPIO_ACTIVE_LOW>;
+	};
 };
 
 &iomuxc {
@@ -346,7 +358,6 @@
 			fsl,pins = <
 				MX6UL_PAD_UART1_RTS_B__GPIO1_IO19	0x17059 /* SD1 CD */
 				MX6UL_PAD_GPIO1_IO05__USDHC1_VSELECT	0x17059 /* SD1 VSELECT */
-				MX6UL_PAD_GPIO1_IO09__GPIO1_IO09        0x17059 /* SD1 RESET */
 			>;
 		};
 
@@ -508,10 +519,7 @@
 
 		pinctrl_tsc: tscgrp {
 			fsl,pins = <
-				MX6UL_PAD_GPIO1_IO01__GPIO1_IO01	0xb0
-				MX6UL_PAD_GPIO1_IO02__GPIO1_IO02	0xb0
-				/* MX6UL_PAD_GPIO1_IO03__GPIO1_IO03	0xb0 */
-				MX6UL_PAD_GPIO1_IO04__GPIO1_IO04	0xb0
+				MX6UL_PAD_GPIO1_IO09__GPIO1_IO09	0xF080
 			>;
 		};
 
@@ -688,6 +696,12 @@
 		pinctrl_enet2_reset: enet2resetgrp {
 			fsl,pins = <
 				MX6ULL_PAD_SNVS_TAMPER8__GPIO5_IO08 0x10B0
+			>;
+		};
+
+		pinctrl_tsc_reset: tsc_reset {
+			fsl,pins = <
+				MX6ULL_PAD_SNVS_TAMPER9__GPIO5_IO09 0x10B0
 			>;
 		};
         };
