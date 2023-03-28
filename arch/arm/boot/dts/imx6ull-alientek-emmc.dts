@@ -337,9 +337,9 @@
 	};
 
 
-	ft5426: ft5426@38 {
-		compatible = "edt,edt-ft5426";
-		reg = <0x38>;
+	gt9147: gt9147@14 {
+		compatible = "goodix,gt9147";
+		reg = <0x14>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_tsc
 					&pinctrl_tsc_reset >;
@@ -671,7 +671,7 @@
 		pinctrl_lcdif_reset: lcdifresetgrp {
                         fsl,pins = <
                                 /* used for lcd reset */
-                                MX6ULL_PAD_SNVS_TAMPER9__GPIO5_IO09  0x79
+                                /* MX6ULL_PAD_SNVS_TAMPER9__GPIO5_IO09  0x79 */
                         >;
                 };
 
@@ -780,14 +780,6 @@
 	status = "okay";
 };
 
-&tsc {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_tsc>;
-	/* xnur-gpio = <&gpio1 3 GPIO_ACTIVE_LOW>; */
-	measure-delay-time = <0xffff>;
-	pre-charge-time = <0xfff>;
-	status = "okay";
-};
 
 &uart1 {
 	pinctrl-names = "default";
